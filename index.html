@@ -1,369 +1,284 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-    />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Diamond Rush: Dark Edges</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Retro Pixel Font -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-      * {
-        font-family: "Press Start 2P", monospace;
-        user-select: none;
-        -webkit-user-select: none;
-        touch-action: manipulation;
-      }
-
-      /* Crisp Pixel-Art Canvas & Graphics */
-      canvas,
-      .pixel-art {
-        image-rendering: pixelated;
-        image-rendering: crisp-edges;
-      }
-
-      /* Retro Pixel Horror Button */
-      .pixel-btn {
-        position: relative;
-        background: #110202;
-        color: #ff3333;
-        border: 4px solid #660000;
-        box-shadow:
-          inset -4px -4px 0px #220000,
-          inset 4px 4px 0px #990000,
-          0 0 15px rgba(255, 0, 0, 0.6);
-        transition: all 0.1s ease;
-        animation: redPulse 2s infinite ease-in-out;
-      }
-
-      @keyframes redPulse {
-        0%,
-        100% {
-          box-shadow:
-            inset -4px -4px 0px #220000,
-            inset 4px 4px 0px #990000,
-            0 0 12px rgba(255, 0, 0, 0.5);
-          border-color: #660000;
+        * {
+            font-family: 'Press Start 2P', monospace;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
         }
-        50% {
-          box-shadow:
-            inset -4px -4px 0px #330000,
-            inset 4px 4px 0px #ff2222,
-            0 0 22px rgba(255, 0, 0, 0.9);
-          border-color: #aa0000;
-          color: #ffffff;
+
+        /* Crisp Pixel-Art Canvas & Graphics */
+        canvas, .pixel-art {
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
         }
-      }
 
-      .pixel-btn:active {
-        transform: translateY(3px);
-        box-shadow:
-          inset -2px -2px 0px #220000,
-          inset 2px 2px 0px #660000,
-          0 0 5px #ff0000;
-      }
+        /* Retro Pixel Horror Button */
+        .pixel-btn {
+            position: relative;
+            background: #110202;
+            color: #ff3333;
+            border: 4px solid #660000;
+            box-shadow: inset -4px -4px 0px #220000, inset 4px 4px 0px #990000, 0 0 15px rgba(255, 0, 0, 0.6);
+            transition: all 0.1s ease;
+            animation: redPulse 2s infinite ease-in-out;
+        }
 
-      /* D-Pad Directional Buttons */
-      .dpad-btn {
-        background: #18181b;
-        border: 3px solid #3f3f46;
-        box-shadow:
-          inset -3px -3px 0px #09090b,
-          inset 3px 3px 0px #52525b,
-          0 4px 0px #000000;
-        color: #a1a1aa;
-      }
+        @keyframes redPulse {
+            0%, 100% {
+                box-shadow: inset -4px -4px 0px #220000, inset 4px 4px 0px #990000, 0 0 12px rgba(255, 0, 0, 0.5);
+                border-color: #660000;
+            }
+            50% {
+                box-shadow: inset -4px -4px 0px #330000, inset 4px 4px 0px #ff2222, 0 0 22px rgba(255, 0, 0, 0.9);
+                border-color: #aa0000;
+                color: #ffffff;
+            }
+        }
 
-      .dpad-btn:active {
-        transform: translateY(3px);
-        background: #27272a;
-        color: #ff2222;
-        border-color: #880000;
-        box-shadow:
-          inset -2px -2px 0px #09090b,
-          inset 2px 2px 0px #3f3f46,
-          0 1px 0px #000000;
-      }
+        .pixel-btn:active {
+            transform: translateY(3px);
+            box-shadow: inset -2px -2px 0px #220000, inset 2px 2px 0px #660000, 0 0 5px #ff0000;
+        }
 
-      /* Handheld Container Outer Frame */
-      .handheld-frame {
-        box-shadow:
-          0 20px 50px rgba(0, 0, 0, 0.9),
-          0 0 30px rgba(80, 0, 0, 0.5);
-        border: 6px solid #18181b;
-      }
+        /* D-Pad Directional Buttons */
+        .dpad-btn {
+            background: #18181b;
+            border: 3px solid #3f3f46;
+            box-shadow: inset -3px -3px 0px #09090b, inset 3px 3px 0px #52525b, 0 4px 0px #000000;
+            color: #a1a1aa;
+        }
+
+        .dpad-btn:active {
+            transform: translateY(3px);
+            background: #27272a;
+            color: #ff2222;
+            border-color: #880000;
+            box-shadow: inset -2px -2px 0px #09090b, inset 2px 2px 0px #3f3f46, 0 1px 0px #000000;
+        }
+
+        /* Handheld Container Outer Frame */
+        .handheld-frame {
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(80, 0, 0, 0.5);
+            border: 6px solid #18181b;
+        }
     </style>
-  </head>
-  <body
-    class="min-h-screen bg-zinc-950 flex items-center justify-center p-2 sm:p-4 overflow-hidden"
-  >
+</head>
+<body class="min-h-screen bg-zinc-950 flex items-center justify-center p-2 sm:p-4 overflow-hidden">
+
     <!-- Phone / Mobile Game Frame -->
-    <div
-      class="handheld-frame w-full max-w-[360px] h-[660px] bg-black rounded-[32px] overflow-hidden flex flex-col justify-between relative"
-    >
-      <!-- GAME VIEWPORT AREA -->
-      <div
-        class="relative w-full flex-1 bg-black overflow-hidden border-b-4 border-zinc-900 flex items-center justify-center"
-      >
-        <!-- Bloody Red Sky blending down to White/Fog Gradient Background Canvas -->
-        <canvas
-          id="screenCanvas"
-          width="320"
-          height="400"
-          class="w-full h-full object-cover block absolute inset-0 z-0"
-        ></canvas>
+    <div class="handheld-frame w-full max-w-[360px] h-[660px] bg-black rounded-[32px] overflow-hidden flex flex-col justify-between relative">
+        
+        <!-- GAME VIEWPORT AREA -->
+        <div class="relative w-full flex-1 bg-black overflow-hidden border-b-4 border-zinc-900 flex items-center justify-center">
+            
+            <!-- Bloody Red Sky blending down to White/Fog Gradient Background Canvas -->
+            <canvas id="screenCanvas" width="320" height="400" class="w-full h-full object-cover block absolute inset-0 z-0"></canvas>
 
-        <!-- MENU OVERLAY (Only the central button) -->
-        <div
-          id="mainMenu"
-          class="absolute inset-0 z-10 flex items-center justify-center p-6"
-        >
-          <button
-            id="btnPlay"
-            class="pixel-btn px-8 py-5 text-base font-bold tracking-wider uppercase rounded cursor-pointer"
-          >
-            ИГРАТЬ
-          </button>
+            <!-- MENU OVERLAY (Only the central button) -->
+            <div id="mainMenu" class="absolute inset-0 z-10 flex items-center justify-center p-3">
+                <button id="btnPlay" class="pixel-btn w-full h-48 text-xl font-bold tracking-widest uppercase rounded cursor-pointer flex items-center justify-center">
+                    ИГРАТЬ
+                </button>
+            </div>
+
+            <!-- GAME ACTIVE OVERLAY (Hidden initially) -->
+            <div id="gameOverlay" class="hidden absolute top-3 left-3 z-10 text-[9px] text-red-500 font-bold bg-black/70 px-2 py-1 rounded border border-red-900/50">
+                <span id="posText">ХОД: [5, 5]</span>
+            </div>
         </div>
 
-        <!-- GAME ACTIVE OVERLAY (Hidden initially) -->
-        <div
-          id="gameOverlay"
-          class="hidden absolute top-3 left-3 z-10 text-[9px] text-red-500 font-bold bg-black/70 px-2 py-1 rounded border border-red-900/50"
-        >
-          <span id="posText">ХОД: [5, 5]</span>
+        <!-- BOTTOM BLACK CONTROLS PANEL -->
+        <div class="w-full bg-black p-4 border-t-2 border-zinc-900 flex flex-col items-center justify-center relative select-none z-30">
+            <!-- 4-Way D-Pad Layout -->
+            <div class="relative w-36 h-36 grid grid-cols-3 grid-rows-3 gap-1 items-center justify-items-center">
+                <!-- Row 1 -->
+                <div></div>
+                <button id="btnUp" class="dpad-btn w-11 h-11 rounded flex items-center justify-center text-base">
+                    ▲
+                </button>
+                <div></div>
+
+                <!-- Row 2 -->
+                <button id="btnLeft" class="dpad-btn w-11 h-11 rounded flex items-center justify-center text-base">
+                    ◄
+                </button>
+                <div class="w-6 h-6 rounded-full bg-zinc-950 border border-zinc-800 flex items-center justify-center">
+                    <div class="w-2 h-2 rounded-full bg-red-900"></div>
+                </div>
+                <button id="btnRight" class="dpad-btn w-11 h-11 rounded flex items-center justify-center text-base">
+                    ►
+                </button>
+
+                <!-- Row 3 -->
+                <div></div>
+                <button id="btnDown" class="dpad-btn w-11 h-11 rounded flex items-center justify-center text-base">
+                    ▼
+                </button>
+                <div></div>
+            </div>
         </div>
-      </div>
-
-      <!-- BOTTOM BLACK CONTROLS PANEL -->
-      <div
-        class="w-full bg-black p-4 border-t-2 border-zinc-900 flex flex-col items-center justify-center relative select-none z-30"
-      >
-        <!-- 4-Way D-Pad Layout -->
-        <div
-          class="relative w-36 h-36 grid grid-cols-3 grid-rows-3 gap-1 items-center justify-items-center"
-        >
-          <!-- Row 1 -->
-          <div></div>
-          <button
-            id="btnUp"
-            class="dpad-btn w-11 h-11 rounded flex items-center justify-center text-base"
-          >
-            ▲
-          </button>
-          <div></div>
-
-          <!-- Row 2 -->
-          <button
-            id="btnLeft"
-            class="dpad-btn w-11 h-11 rounded flex items-center justify-center text-base"
-          >
-            ◄
-          </button>
-          <div
-            class="w-6 h-6 rounded-full bg-zinc-950 border border-zinc-800 flex items-center justify-center"
-          >
-            <div class="w-2 h-2 rounded-full bg-red-900"></div>
-          </div>
-          <button
-            id="btnRight"
-            class="dpad-btn w-11 h-11 rounded flex items-center justify-center text-base"
-          >
-            ►
-          </button>
-
-          <!-- Row 3 -->
-          <div></div>
-          <button
-            id="btnDown"
-            class="dpad-btn w-11 h-11 rounded flex items-center justify-center text-base"
-          >
-            ▼
-          </button>
-          <div></div>
-        </div>
-      </div>
     </div>
 
     <!-- Script Logic -->
     <script>
-      const canvas = document.getElementById("screenCanvas");
-      const ctx = canvas.getContext("2d");
-      const mainMenu = document.getElementById("mainMenu");
-      const gameOverlay = document.getElementById("gameOverlay");
-      const posText = document.getElementById("posText");
+        const canvas = document.getElementById('screenCanvas');
+        const ctx = canvas.getContext('2d');
+        const mainMenu = document.getElementById('mainMenu');
+        const gameOverlay = document.getElementById('gameOverlay');
+        const posText = document.getElementById('posText');
 
-      let isPlaying = false;
-      let playerPos = { x: 5, y: 5 };
+        let isPlaying = false;
+        let playerPos = { x: 5, y: 5 };
 
-      // Audio Context Synthesizer for Horror Sounds
-      let audioCtx = null;
+        // Audio Context Synthesizer for Horror Sounds
+        let audioCtx = null;
 
-      function initAudio() {
-        if (!audioCtx) {
-          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
         }
-      }
 
-      function playHorrorSound(type) {
-        if (!audioCtx) return;
+        function playHorrorSound(type) {
+            if (!audioCtx) return;
 
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
 
-        const now = audioCtx.currentTime;
+            const now = audioCtx.currentTime;
 
-        if (type === "start") {
-          osc.type = "sawtooth";
-          osc.frequency.setValueAtTime(100, now);
-          osc.frequency.exponentialRampToValueAtTime(30, now + 1.0);
-          gain.gain.setValueAtTime(0.3, now);
-          gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
-          osc.start(now);
-          osc.stop(now + 1.0);
-        } else if (type === "step") {
-          osc.type = "square";
-          osc.frequency.setValueAtTime(65, now);
-          osc.frequency.exponentialRampToValueAtTime(25, now + 0.12);
-          gain.gain.setValueAtTime(0.15, now);
-          gain.gain.linearRampToValueAtTime(0.01, now + 0.12);
-          osc.start(now);
-          osc.stop(now + 0.12);
+            if (type === 'start') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(100, now);
+                osc.frequency.exponentialRampToValueAtTime(30, now + 1.0);
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 1.0);
+                osc.start(now);
+                osc.stop(now + 1.0);
+            } else if (type === 'step') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(65, now);
+                osc.frequency.exponentialRampToValueAtTime(25, now + 0.12);
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.12);
+                osc.start(now);
+                osc.stop(now + 0.12);
+            }
         }
-      }
 
-      // Floating Fog Particles Animation
-      const particles = Array.from({ length: 25 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        size: Math.random() * 3 + 2,
-        speed: Math.random() * 0.3 + 0.1,
-        opacity: Math.random() * 0.4 + 0.2,
-      }));
+        // Floating Fog Particles Animation
+        const particles = Array.from({ length: 25 }, () => ({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            size: Math.random() * 3 + 2,
+            speed: Math.random() * 0.3 + 0.1,
+            opacity: Math.random() * 0.4 + 0.2
+        }));
 
-      function renderScreen() {
-        // Background Gradient: Bloody Red (Top) -> Foggy White (Bottom)
-        const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        gradient.addColorStop(0, "#300000");
-        gradient.addColorStop(0.45, "#770000");
-        gradient.addColorStop(0.85, "#b09595");
-        gradient.addColorStop(1, "#eae6e6");
+        function renderScreen() {
+            // Background Gradient: Bloody Red (Top) -> Foggy White (Bottom)
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#300000');
+            gradient.addColorStop(0.45, '#770000');
+            gradient.addColorStop(0.85, '#b09595');
+            gradient.addColorStop(1, '#eae6e6');
 
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Floating dark fog particles
-        particles.forEach((p) => {
-          ctx.fillStyle = `rgba(20, 0, 0, ${p.opacity})`;
-          ctx.fillRect(
-            Math.floor(p.x),
-            Math.floor(p.y),
-            Math.floor(p.size),
-            Math.floor(p.size),
-          );
-          p.y += p.speed;
-          if (p.y > canvas.height) {
-            p.y = -5;
-            p.x = Math.random() * canvas.width;
-          }
+            // Floating dark fog particles
+            particles.forEach(p => {
+                ctx.fillStyle = `rgba(20, 0, 0, ${p.opacity})`;
+                ctx.fillRect(Math.floor(p.x), Math.floor(p.y), Math.floor(p.size), Math.floor(p.size));
+                p.y += p.speed;
+                if (p.y > canvas.height) {
+                    p.y = -5;
+                    p.x = Math.random() * canvas.width;
+                }
+            });
+
+            // Gameplay Grid Rendering (When "ИГРАТЬ" is active)
+            if (isPlaying) {
+                const tileSize = 24;
+                const gridWidth = 10;
+                const gridHeight = 10;
+                const offsetX = (canvas.width - gridWidth * tileSize) / 2;
+                const offsetY = (canvas.height - gridHeight * tileSize) / 2;
+
+                // Grid background & tiles
+                for (let r = 0; r < gridHeight; r++) {
+                    for (let c = 0; c < gridWidth; c++) {
+                        ctx.strokeStyle = 'rgba(40, 0, 0, 0.4)';
+                        ctx.strokeRect(offsetX + c * tileSize, offsetY + r * tileSize, tileSize, tileSize);
+                    }
+                }
+
+                // Player character (Red Glowing Pixel)
+                const px = offsetX + playerPos.x * tileSize;
+                const py = offsetY + playerPos.y * tileSize;
+
+                ctx.fillStyle = '#ff1111';
+                ctx.fillRect(px + 4, py + 4, 16, 16);
+                
+                // Eyes
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(px + 7, py + 8, 3, 3);
+                ctx.fillRect(px + 12, py + 8, 3, 3);
+            }
+
+            requestAnimationFrame(renderScreen);
+        }
+
+        // Play Button Click
+        document.getElementById('btnPlay').addEventListener('click', () => {
+            initAudio();
+            playHorrorSound('start');
+            
+            mainMenu.classList.add('hidden');
+            gameOverlay.classList.remove('hidden');
+            isPlaying = true;
         });
 
-        // Gameplay Grid Rendering (When "ИГРАТЬ" is active)
-        if (isPlaying) {
-          const tileSize = 24;
-          const gridWidth = 10;
-          const gridHeight = 10;
-          const offsetX = (canvas.width - gridWidth * tileSize) / 2;
-          const offsetY = (canvas.height - gridHeight * tileSize) / 2;
+        // Movement Control Logic
+        function handleMove(dx, dy) {
+            if (!isPlaying) return;
+            initAudio();
 
-          // Grid background & tiles
-          for (let r = 0; r < gridHeight; r++) {
-            for (let c = 0; c < gridWidth; c++) {
-              ctx.strokeStyle = "rgba(40, 0, 0, 0.4)";
-              ctx.strokeRect(
-                offsetX + c * tileSize,
-                offsetY + r * tileSize,
-                tileSize,
-                tileSize,
-              );
-            }
-          }
-
-          // Player character (Red Glowing Pixel)
-          const px = offsetX + playerPos.x * tileSize;
-          const py = offsetY + playerPos.y * tileSize;
-
-          ctx.fillStyle = "#ff1111";
-          ctx.fillRect(px + 4, py + 4, 16, 16);
-
-          // Eyes
-          ctx.fillStyle = "#ffffff";
-          ctx.fillRect(px + 7, py + 8, 3, 3);
-          ctx.fillRect(px + 12, py + 8, 3, 3);
+            playerPos.x = Math.max(0, Math.min(9, playerPos.x + dx));
+            playerPos.y = Math.max(0, Math.min(9, playerPos.y + dy));
+            
+            playHorrorSound('step');
+            posText.innerText = `ХОД: [${playerPos.x}, ${playerPos.y}]`;
         }
 
-        requestAnimationFrame(renderScreen);
-      }
+        // Button Listeners
+        document.getElementById('btnUp').addEventListener('click', () => handleMove(0, -1));
+        document.getElementById('btnDown').addEventListener('click', () => handleMove(0, 1));
+        document.getElementById('btnLeft').addEventListener('click', () => handleMove(-1, 0));
+        document.getElementById('btnRight').addEventListener('click', () => handleMove(1, 0));
 
-      // Play Button Click
-      document.getElementById("btnPlay").addEventListener("click", () => {
-        initAudio();
-        playHorrorSound("start");
+        // Keyboard Support (WASD & Arrows)
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowUp' || e.key === 'w' || e.key === 'W') handleMove(0, -1);
+            if (e.key === 'ArrowDown' || e.key === 's' || e.key === 'S') handleMove(0, 1);
+            if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') handleMove(-1, 0);
+            if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') handleMove(1, 0);
+        });
 
-        mainMenu.classList.add("hidden");
-        gameOverlay.classList.remove("hidden");
-        isPlaying = true;
-      });
-
-      // Movement Control Logic
-      function handleMove(dx, dy) {
-        if (!isPlaying) return;
-        initAudio();
-
-        playerPos.x = Math.max(0, Math.min(9, playerPos.x + dx));
-        playerPos.y = Math.max(0, Math.min(9, playerPos.y + dy));
-
-        playHorrorSound("step");
-        posText.innerText = `ХОД: [${playerPos.x}, ${playerPos.y}]`;
-      }
-
-      // Button Listeners
-      document
-        .getElementById("btnUp")
-        .addEventListener("click", () => handleMove(0, -1));
-      document
-        .getElementById("btnDown")
-        .addEventListener("click", () => handleMove(0, 1));
-      document
-        .getElementById("btnLeft")
-        .addEventListener("click", () => handleMove(-1, 0));
-      document
-        .getElementById("btnRight")
-        .addEventListener("click", () => handleMove(1, 0));
-
-      // Keyboard Support (WASD & Arrows)
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "ArrowUp" || e.key === "w" || e.key === "W")
-          handleMove(0, -1);
-        if (e.key === "ArrowDown" || e.key === "s" || e.key === "S")
-          handleMove(0, 1);
-        if (e.key === "ArrowLeft" || e.key === "a" || e.key === "A")
-          handleMove(-1, 0);
-        if (e.key === "ArrowRight" || e.key === "d" || e.key === "D")
-          handleMove(1, 0);
-      });
-
-      // Start render loop
-      renderScreen();
+        // Start render loop
+        renderScreen();
     </script>
-  </body>
+</body>
 </html>
