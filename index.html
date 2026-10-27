@@ -24,8 +24,8 @@
 </head>
 <body class="flex flex-col h-screen w-screen justify-between select-none">
 
-    <!-- ИГРОВОЙ ЭКРАН -->
-    <div id="game-container" class="w-full aspect-square bg-black relative overflow-hidden flex flex-col justify-center items-center shadow-2xl">
+    <!-- ИГРОВОЙ ЭКРАН С КРАСНЫМИ РАМКАМИ ПО БОКАМ И СВЕРХУ -->
+    <div id="game-container" class="w-full aspect-square bg-black relative overflow-hidden flex flex-col justify-center items-center shadow-2xl border-x-4 border-t-4 border-red-950">
         <!-- Главное меню -->
         <div id="main-menu" class="absolute inset-0 flex flex-col items-center justify-center p-4 bg-black/40 z-10">
             <button id="play-btn" class="w-3/4 max-w-xs py-6 bg-red-800 hover:bg-red-700 active:bg-red-900 text-white border-4 border-red-950 shadow-[0_0_20px_rgba(255,0,0,0.6)] text-xl font-bold tracking-wider pixelated transition transform active:scale-95 cursor-pointer">
@@ -60,13 +60,13 @@
 
         let gameStarted = false;
 
-        // Размеры тайла и большой карты (например, 20 на 20 блоков)
+        // Размеры тайла и карты
         const TILE_SIZE = 32;
         const MAP_WIDTH = 20;
         const MAP_HEIGHT = 20;
 
         let player = {
-            x: 2, // стартовая клетка
+            x: 2,
             y: 2,
             size: TILE_SIZE
         };
@@ -108,23 +108,21 @@
         function update() {}
 
         function draw() {
-            // Очистка экрана
             ctx.fillStyle = '#110000';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Расчет камеры, чтобы она следовала за игроком и центрировала его
+            // Центрирование камеры
             let cameraX = player.x * TILE_SIZE - canvas.width / 2 + TILE_SIZE / 2;
             let cameraY = player.y * TILE_SIZE - canvas.height / 2 + TILE_SIZE / 2;
 
-            // Ограничение камеры в пределах карты, чтобы не выходить за границы мира
+            // Ограничение камеры краями карты
             cameraX = Math.max(0, Math.min(cameraX, MAP_WIDTH * TILE_SIZE - canvas.width));
             cameraY = Math.max(0, Math.min(cameraY, MAP_HEIGHT * TILE_SIZE - canvas.height));
 
             ctx.save();
-            // Смещаем мир в соответствии с камерой
             ctx.translate(-cameraX, -cameraY);
 
-            // Отрисовка сетки большой карты (стены/блоки для наглядности)
+            // Сетка мира
             ctx.strokeStyle = '#330505';
             ctx.lineWidth = 1;
             for (let x = 0; x <= MAP_WIDTH; x++) {
@@ -140,7 +138,7 @@
                 ctx.stroke();
             }
 
-            // Отрисовка игрока
+            // Игрок
             ctx.fillStyle = '#ff3333';
             ctx.fillRect(player.x * TILE_SIZE, player.y * TILE_SIZE, TILE_SIZE, TILE_SIZE);
 
